@@ -36,3 +36,18 @@ function portfolio_value_no_parameter(data) {
   }
   return dict_token;
 }
+
+
+function portfolio_value_with_token_parameter(data, token) {
+  let balance = 0;
+  for (let i = 0; i < data.length; i++) {
+    if (token === data[i].token) {
+      if (data[i].transaction_type === "DEPOSIT") {
+        balance = balance + Number(data[i].amount);
+      } else {
+        balance = balance - Number(data[i].amount);
+      }
+    }
+  }
+  return balance;
+}
