@@ -51,3 +51,46 @@ function portfolio_value_with_token_parameter(data, token) {
   }
   return balance;
 }
+
+
+
+function portfolio_value_date_parameter(data, date) {
+  let dict_token = {};
+  let token_list = [];
+  let balance;
+  for (let i = 0; i < data.length; i++) {
+    if (token_list.includes(data[i].token)) {
+      if (data[i].timestamp < date.getTime()) {
+        balance = dict_token[data[i].token];
+        if (data[i].transaction_type === "DEPOSIT") {
+          balance = balance + Number(data[i].amount);
+        } else {
+          balance = balance - Number(data[i].amount);
+        }
+        dict_token[data[i].token] = balance;
+      }
+    } else {
+      if (data[i].timestamp < date.getTime()) {
+        dict_token[data[i].token] = Number(data[i].amount);
+        token_list.push(data[i].token);
+      }
+    }
+  }
+  return dict_token;
+}
+
+function portfolio_value_with_token_date_parameter(data, token, date) {
+  let balance = 0;
+  for (let i = 0; i < data.length; i++) {
+    if (token === data[i].token) {
+      if (data[i].timestamp < date.getTime()) {
+        if (data[i].transaction_type === "DEPOSIT") {
+          balance = balance + Number(data[i].amount);
+        } else {
+          balance = balance - Number(data[i].amount);
+        }
+      }
+    }
+  }
+  return balance;
+}
