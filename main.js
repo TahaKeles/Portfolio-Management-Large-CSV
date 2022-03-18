@@ -23,12 +23,11 @@ async function main() {
   } else if (option === "3") {
     let date = prompt("Write your date like (26-02-2012) : ");
     date = date.split("-");
-    console.log("My date : ", date);
     var newDate = new Date(date[2], date[1] - 1, date[0]);
     console.log(await portfolio_value_date_parameter(data, newDate));
   } else if (option === "4") {
     let date = prompt("Write your date like (26-02-2012) : ");
-    let token = prompt("Write your token like (BTC, ETH, XRP) :");
+    let token = prompt("Write your token like (BTC, ETH, XRP) : ");
     date = date.split("-");
     var newDate = new Date(date[2], date[1] - 1, date[0]);
     console.log(
